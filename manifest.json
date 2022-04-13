@@ -17,6 +17,8 @@
     {
       "run_at": "document_start",
       "matches": [
+        "http://localhost:8250/oidc/*",
+        "https://localhost:8250/oidc/*",
         "*://*.zoom.us/a/*",
         "*://*.zoom.us/b/*",
         "*://*.zoom.us/c/*",

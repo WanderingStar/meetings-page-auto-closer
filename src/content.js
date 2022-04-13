@@ -180,11 +180,19 @@ function isPageTextLikeMeetingLaunch() {
   return false;
 }
 
+function isCanClose() {
+  const pageText = document?.body?.innerText?.toLowerCase() || '';
+  if (pageText.includes('you can now close this window')) {
+    return true;
+  }
+  return false;
+}
+
 function countDownToClose() {
   timeTillCloseMs -= intervalRateMs;
-  log(`TimeMs left: ${timeTillCloseMs} isPageText=${isPageTextLikeMeetingLaunch()} isSuccess=${isMeetingStatusSuccess()} isPostAttendee=${isPostAttendee()} isWebClientLeave=${isWebClientLeave()}`);
+  log(`TimeMs left: ${timeTillCloseMs} isCanClose=${isCanClose()} isPageText=${isPageTextLikeMeetingLaunch()} isSuccess=${isMeetingStatusSuccess()} isPostAttendee=${isPostAttendee()} isWebClientLeave=${isWebClientLeave()}`);
 
-  if (isPageTextLikeMeetingLaunch() || isMeetingStatusSuccess() || isPostAttendee() || isWebClientLeave()) {
+  if (isPageTextLikeMeetingLaunch() || isMeetingStatusSuccess() || isPostAttendee() || isWebClientLeave() || isCanClose()) {
     log(`All checks good to auto close`);
   } else {
     timeTillCloseMs += intervalRateMs; // Put back the time
